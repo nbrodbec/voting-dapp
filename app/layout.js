@@ -1,17 +1,20 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
+import Web3ContextProvider from '@/components/Web3ContextProvider';
+import './globals.css';
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Voting dApp',
+  title: 'Voting DApp',
   description: 'Created by Nicholas Brodbeck',
-}
+};
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang='en'>
+      <Web3ContextProvider>
+        <body className={inter.className + ' min-h-screen'}>{children}</body>
+      </Web3ContextProvider>
     </html>
-  )
+  );
 }
