@@ -1,4 +1,5 @@
 import Button from '@/components/Button';
+import MetaMask from '@/components/MetaMask';
 
 export default function Home() {
   return (
@@ -16,6 +17,9 @@ export default function Home() {
         <div className='flex flex-row justify-center gap-4 md:justify-start'>
           <Button href='/create'>Create a Poll</Button>
           <Button>Submit a Poll</Button>
+          <MetaMask connected>
+            <Button color='blue' href='/manage'>My Polls</Button>
+          </MetaMask>
         </div>
       </div>
     </main>
