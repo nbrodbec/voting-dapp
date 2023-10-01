@@ -1,6 +1,6 @@
 const TextInput = ({ children, id, ...props }) => {
   return (
-    <div className='flex flex-col'>
+    <div className='flex grow flex-col'>
       <label className='font-medium' htmlFor={id}>
         {children}
       </label>
