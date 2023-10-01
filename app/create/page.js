@@ -1,10 +1,14 @@
-import CreateForm from "@/components/CreateForm";
+import CreateForm from '@/components/CreateForm';
+import TextLink from '@/components/TextLink';
 
 export default function Create() {
   return (
-    <main className='min-h-screen p-12 grid items-start justify-center'>
-      <h1 className='mb-4 text-center' value='New Poll'>Create</h1>
+    <main className='min-h-screen p-12 flex flex-col items-center justify-between'>
+      <h1 className='text-center'>
+        Create
+      </h1>
       <CreateForm />
+      <TextLink href='/'>Cancel</TextLink>
     </main>
   );
 }
