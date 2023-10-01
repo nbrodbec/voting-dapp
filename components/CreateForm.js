@@ -12,7 +12,7 @@ const CreateForm = () => {
   const [options, setOptions] = useState([]);
 
   return (
-    <form className='flex flex-col gap-4'>
+    <form className='flex flex-col gap-4 my-12'>
       <TextInput id='title' placeholder='New Poll' defaultValue='New Poll'>
         Title:
       </TextInput>
