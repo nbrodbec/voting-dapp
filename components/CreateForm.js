@@ -5,9 +5,10 @@ import TextInput from './TextInput';
 import { Web3Context } from './Web3ContextProvider';
 import Button from './Button';
 import MetaMask from './MetaMask';
+import ConnectButton from './ConnectButton';
 
 const CreateForm = () => {
-  const { connect, connecting, signer, address } = useContext(Web3Context);
+  const { network, signer, address } = useContext(Web3Context);
   const [options, setOptions] = useState([]);
 
   return (
@@ -15,23 +16,16 @@ const CreateForm = () => {
       <TextInput id='title' placeholder='New Poll' defaultValue='New Poll'>
         Title:
       </TextInput>
-      <div className='flex flex-row gap-4 place-items-end'>
+      <div className='flex flex-row gap-4 items-end'>
         <TextInput
           id='owner'
           value={address ? address : 'Wallet Not Connected'}
           disabled
         >
-          Owner (You):
+          Wallet {network && `(${network.name})`}:
         </TextInput>
         <MetaMask disconnected>
-          <Button
-            small
-            color='magenta'
-            onClick={() => connect()}
-            disabled={connecting}
-          >
-            Connect
-          </Button>
+          <ConnectButton />
         </MetaMask>
       </div>
 
