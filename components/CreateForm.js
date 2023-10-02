@@ -1,19 +1,28 @@
 'use client';
 
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import TextInput from './TextInput';
 import { Web3Context } from './Web3ContextProvider';
 import Button from './Button';
 import MetaMask from './MetaMask';
 import ConnectButton from './ConnectButton';
+import CreateContract from '@/services/CreateContract';
+import { useRouter } from 'next/navigation';
 
 const CreateForm = () => {
   const { network, signer, address } = useContext(Web3Context);
   const [options, setOptions] = useState([]);
+  const [title, setTitle] = useState('New Poll');
+  const router = useRouter();
 
   return (
     <form className='flex flex-col gap-4 my-12'>
-      <TextInput id='title' placeholder='New Poll' defaultValue='New Poll'>
+      <TextInput
+        id='title'
+        placeholder='New Poll'
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      >
         Title:
       </TextInput>
       <div className='flex flex-row gap-4 items-end'>
@@ -35,6 +44,7 @@ const CreateForm = () => {
           <TextInput
             id={str}
             value={str}
+            placeholder={`Option ${i}`}
             onChange={(event) =>
               setOptions(
                 options.map((def, j) => (i === j ? event.target.value : def))
@@ -55,13 +65,22 @@ const CreateForm = () => {
       ))}
       <Button
         small
-        onClick={() => setOptions([...options, 'Option'])}
+        onClick={() => setOptions([...options, ''])}
         disabled={options.length >= 10}
       >
         Add Option
       </Button>
       <hr />
-      <Button color='blue' disabled={!signer || options.length === 0}>
+      <Button
+        color='blue'
+        disabled={!signer || options.length === 0}
+        onClick={async () => {
+          const code = await CreateContract(title, options, signer);
+          if (code) {
+            router.push(`/submit/${code.toUpperCase()}`);
+          }
+        }}
+      >
         Create
       </Button>
     </form>
