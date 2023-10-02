@@ -1,10 +1,22 @@
-const { default: Link } = require('next/link');
+'use client';
+import { useRouter } from 'next/navigation';
 
-const TextLink = ({ children, href }) => {
+const TextLink = ({ children, href, back }) => {
+  const router = useRouter();
   return (
-    <Link href={href} className='text-base font-medium mx-auto hover:text-lg hover:underline transition-all'>
+    <button
+      onClick={(e) => {
+        e.preventDefault();
+        if (href) {
+          router.push(href);
+        } else if (back) {
+          router.back();
+        }
+      }}
+      className='text-base font-medium mx-auto hover:text-lg hover:underline transition-all'
+    >
       {children}
-    </Link>
+    </button>
   );
 };
 
