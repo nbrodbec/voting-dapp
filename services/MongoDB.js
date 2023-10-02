@@ -15,7 +15,7 @@ let pollCollection;
 async function run() {
   try {
     await client.connect();
-    db = client.db('sample_mflix');
+    db = client.db('production');
     pollCollection = db.collection('polls');
   } finally {
     // await client.close();
