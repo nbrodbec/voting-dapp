@@ -30,7 +30,6 @@ async function CreateContract(title, options, signer) {
       });
 
       await poll.waitForDeployment();
-
       let code = await response.json();
 
       return code;
