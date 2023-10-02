@@ -3,6 +3,7 @@ pragma solidity ^0.8.9;
 
 contract Poll {
     address public owner;
+    bytes32 public title;
     bytes32[10] public pollOptionStrings;
     mapping(address => bool) public registeredVoters;
     uint public numVoters = 0;
@@ -15,8 +16,9 @@ contract Poll {
     }
     Phase public currentPhase = Phase.REGISTRATION;
 
-    constructor(bytes32[10] memory options) {
+    constructor(bytes32 name, bytes32[10] memory options) {
         owner = msg.sender;
+        title = name;
         pollOptionStrings = options;
     }
 
