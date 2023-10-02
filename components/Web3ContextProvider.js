@@ -13,6 +13,7 @@ const Web3ContextProvider = ({ children }) => {
   const [network, setNetwork] = useState();
   
   const connect = () => {
+    if (connecting) return;
     setConnecting(true);
 
     const providerObj = new ethers.BrowserProvider(window.ethereum);
