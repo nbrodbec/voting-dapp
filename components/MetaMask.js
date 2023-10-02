@@ -7,7 +7,7 @@ const MetaMask = ({ children, connected, disconnected }) => {
   if (!connected) connected = !disconnected;
   return (
     <span
-      className={connected ? !signer && 'hidden' : signer && 'hidden'}
+      className={connected ? (!signer ? 'hidden' : '') : signer ? 'hidden' : ''}
     >
       {children}
     </span>
