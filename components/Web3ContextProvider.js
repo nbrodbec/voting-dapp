@@ -41,7 +41,7 @@ const Web3ContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (window.ethereum === null) {
+    if (window.ethereum === undefined) {
       // No write-access; no keys loaded with MetaMask!
       const providerObj = ethers.getDefaultProvider();
       setProvider(providerObj);
