@@ -1,7 +1,7 @@
 'use client';
 
 import { ethers } from 'ethers';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useCallback, useEffect, useState } from 'react';
 
 export const Web3Context = createContext();
 
@@ -12,7 +12,7 @@ const Web3ContextProvider = ({ children }) => {
   const [connecting, setConnecting] = useState(false);
   const [network, setNetwork] = useState();
   
-  const connect = () => {
+  const connect = useCallback(() => {
     if (connecting) return;
     setConnecting(true);
 
@@ -39,7 +39,7 @@ const Web3ContextProvider = ({ children }) => {
         setSigner(null);
         setConnecting(false);
       });
-  };
+  }, [connecting]);
 
   useEffect(() => {
     if (window.ethereum === null) {

@@ -103,7 +103,7 @@ export default function PollPage({ params }) {
     return () => {
       if (cleanup) cleanup();
     };
-  }, [provider, connect]);
+  }, [provider, connect, params.code]);
 
   return (
     <main className='p-12 flex flex-col gap-12 min-h-screen justify-between text-center'>
