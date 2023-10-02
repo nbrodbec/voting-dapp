@@ -16,7 +16,7 @@ export default function Home() {
         </p>
         <div className='flex flex-row justify-center gap-4 md:justify-start'>
           <Button href='/create'>Create a Poll</Button>
-          <Button>Submit a Poll</Button>
+          <Button href='/submit'>Submit a Poll</Button>
           <MetaMask connected>
             <Button color='blue' href='/manage'>My Polls</Button>
           </MetaMask>
