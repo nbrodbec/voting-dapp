@@ -59,7 +59,7 @@ const Web3ContextProvider = ({ children }) => {
         window.ethereum.removeListener('chainChanged', connect);
       };
     }
-  }, []);
+  }, [connect]);
 
   return (
     <Web3Context.Provider value={{ address, connect, connecting, network, provider, signer }}>
