@@ -2,6 +2,8 @@
 import { useContext } from 'react';
 import Button from './Button';
 import { Web3Context } from './Web3ContextProvider';
+import MetaMask from './MetaMask';
+import ConnectButton from './ConnectButton';
 
 const Register = ({ poll, setPoll }) => {
   const { signer } = useContext(Web3Context);
