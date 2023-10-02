@@ -13,7 +13,6 @@ const Web3ContextProvider = ({ children }) => {
   const [network, setNetwork] = useState();
   
   const connect = useCallback(() => {
-    if (connecting) return;
     setConnecting(true);
 
     const providerObj = new ethers.BrowserProvider(window.ethereum);
@@ -39,7 +38,7 @@ const Web3ContextProvider = ({ children }) => {
         setSigner(null);
         setConnecting(false);
       });
-  }, [connecting]);
+  }, []);
 
   useEffect(() => {
     if (window.ethereum === null) {
