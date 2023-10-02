@@ -37,8 +37,8 @@ export default function Manage() {
         <main className='min-h-screen p-12 flex flex-col space-y-8 justify-between items-center'>
           <h1 className='text-center'>My Polls</h1>
           <div className='grid grid-cols-3 grid-flow-row gap-4 md:grid-cols-4'>
-            {addresses.map((code) => (
-                <Button href={`/submit/${code}`}>{code}</Button>
+            {addresses.map((code, i) => (
+                <Button key={i} href={`/submit/${code}`}>{code}</Button>
             ))}
           </div>
           <TextLink back>Back</TextLink>

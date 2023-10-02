@@ -19,7 +19,7 @@ const Locked = ({ poll }) => {
         {poll.votes.map((num, i) => {
           if (i < poll.options.length) {
             return (
-              <div className='relative flex flex-row justify-between rounded-md font-regular bg-pink-100 font-medium shadow-md p-4'>
+              <div key={i} className='relative flex flex-row justify-between rounded-md font-regular bg-pink-100 font-medium shadow-md p-4'>
                 <span
                   className='absolute h-full bg-pink-300 -m-4 rounded-md'
                   style={{ width: `${(num / valid) * 100}%` }}
