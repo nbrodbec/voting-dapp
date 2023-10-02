@@ -66,24 +66,24 @@ export default function PollPage({ params }) {
           });
 
           contract.on('Vote', (ballot) =>
-            setPoll({
-              ...poll,
+            setPoll(p => ({
+              ...p,
               votes: votes.map((v, i) => (i === Number(ballot) ? v + 1 : v)),
-            })
+            }))
           );
 
           contract.on('PhaseChange', (newPhase) =>
-            setPoll({
-              ...poll,
+            setPoll(p => ({
+              ...p,
               phase: Number(newPhase),
-            })
+            }))
           );
 
           contract.on('Register', () =>
-            setPoll({
-              ...poll,
+            setPoll(p => ({
+              ...p,
               numVoters: numVoters + 1,
-            })
+            }))
           );
 
           cleanup = () => {
@@ -103,7 +103,7 @@ export default function PollPage({ params }) {
     return () => {
       if (cleanup) cleanup();
     };
-  }, [provider]);
+  }, [provider, connect]);
 
   return (
     <main className='p-12 flex flex-col gap-12 min-h-screen justify-between text-center'>
