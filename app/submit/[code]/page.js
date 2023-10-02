@@ -110,7 +110,7 @@ export default function PollPage({ params }) {
       {poll === false ? (
         <>
           <h1>Oops!</h1>
-          <h2>Can't find a poll with code {params.code}!</h2>
+          <h2>Can&apos;t find a poll with code {params.code}!</h2>
         </>
       ) : poll === undefined ? (
         <>
