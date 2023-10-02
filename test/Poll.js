@@ -27,13 +27,16 @@ describe('Poll', function () {
     const pollOptionsBytes32 = pollOptions.map((s) =>
       ethers.encodeBytes32String(s)
     );
+
+    const title = 'General Election';
+    const titleBytes32 = ethers.encodeBytes32String(title);
     // Contracts are deployed using the first signer/account by default
     const [owner, otherAccount] = await ethers.getSigners();
 
     const Poll = await ethers.getContractFactory('Poll');
-    const poll = await Poll.deploy(pollOptionsBytes32);
+    const poll = await Poll.deploy(titleBytes32, pollOptionsBytes32);
 
-    return { poll, pollOptions, owner, otherAccount };
+    return { poll, pollOptions, title, owner, otherAccount };
   }
 
   async function deployPollInVotingPhaseUnregistered() {
@@ -65,9 +68,15 @@ describe('Poll', function () {
     it('Should set the right poll options', async () => {
       const { poll, pollOptions } = await loadFixture(deployPoll);
 
-      expect(await poll.getOptions()).to.deep.equal(
-        pollOptions.map((s) => ethers.encodeBytes32String(s))
-      );
+      expect(
+        (await poll.getOptions()).map((s) => ethers.decodeBytes32String(s))
+      ).to.deep.equal(pollOptions);
+    });
+
+    it('Should set the right title', async () => {
+      const { poll, title } = await loadFixture(deployPoll);
+
+      expect(ethers.decodeBytes32String(await poll.title())).to.equal(title);
     });
 
     it('Should set the right owner', async () => {
@@ -175,7 +184,9 @@ describe('Poll', function () {
 
       await poll.connect(otherAccount).vote(1);
 
-      expect(await poll.getVotes()).to.deep.equal([0, 1, 0, 0, 0, 0, 0, 0, 0, 0]);
+      expect(await poll.getVotes()).to.deep.equal([
+        0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+      ]);
     });
 
     it('Should remove voter from registered voters', async () => {
